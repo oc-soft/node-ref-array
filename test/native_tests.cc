@@ -8,7 +8,14 @@ namespace {
 
 NAN_METHOD(ArrayAbs) {
   int *arr = reinterpret_cast<int *>(Buffer::Data(info[0].As<v8::Object>()));
+#if defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION > 4 ||                      \
+  (V8_MAJOR_VERSION == 4 && defined(V8_MINOR_VERSION) && V8_MINOR_VERSION > 3))
+  v8::Isolate *isolate = v8::Isolate::GetCurrent();
+  uint32_t length = info[1]->Uint32Value(
+    isolate->GetCurrentContext()).FromJust();
+#else
   uint32_t length = info[1]->Uint32Value();
+#endif
   for (uint32_t i = 0; i < length; i++) {
     *(arr + i) = abs(arr[i]);
   }
