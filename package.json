@@ -14,16 +14,16 @@
   "main": "./lib/array.js",
   "license": "MIT",
   "scripts": {
-    "test": "node-gyp rebuild --directory test && node --expose-gc node_modules/mocha/lib/cli/cli.js --reporter spec"
+    "test": "node-gyp rebuild --directory test && node --trace-deprecation --expose-gc node_modules/mocha/lib/cli/cli.js --reporter spec"
   },
   "dependencies": {
-    "array-index": "1",
-    "debug": "2",
+    "array-index": "latest",
+    "debug": "latest",
     "ref": "oc-soft/node-ref#master"
   },
   "devDependencies": {
     "bindings": "1",
     "mocha": "latest",
-    "nan": "oc-soft/npm-nan#main"
+    "nan": "latest"
   }
 }

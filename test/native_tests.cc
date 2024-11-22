@@ -10,7 +10,7 @@ NAN_METHOD(ArrayAbs) {
   int *arr = reinterpret_cast<int *>(Buffer::Data(info[0].As<v8::Object>()));
 #if defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION > 4 ||                      \
   (V8_MAJOR_VERSION == 4 && defined(V8_MINOR_VERSION) && V8_MINOR_VERSION > 3))
-  v8::Isolate *isolate = v8::Isolate::GetCurrent();
+  v8::Isolate *isolate = info.GetIsolate();
   uint32_t length = info[1]->Uint32Value(
     isolate->GetCurrentContext()).FromJust();
 #else
@@ -21,7 +21,11 @@ NAN_METHOD(ArrayAbs) {
   }
 }
 
-void Initialize(v8::Handle<v8::Object> target) {
+void
+Initialize(
+  v8::Local<v8::Object> target,
+  v8::Local<v8::Value> module,
+  void* priv) {
   Nan::HandleScope scope;
   Nan::SetMethod(target, "arrayAbs", ArrayAbs);
 }
