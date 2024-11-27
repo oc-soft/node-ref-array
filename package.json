@@ -22,7 +22,7 @@
     "ref": "oc-soft/node-ref#master"
   },
   "devDependencies": {
-    "bindings": "1",
+    "bindings": "latest",
     "mocha": "latest",
     "nan": "latest"
   }
